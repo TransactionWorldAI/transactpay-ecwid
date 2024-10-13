@@ -139,7 +139,13 @@ var initialConfig = {
         testMode: "true",
         installed: "yes"
     },
-    public: {}
+    public: {
+        publicKey: "",
+        secretKey: "",
+        encryptionKey: "",
+        testMode: "true",
+        installed: "yes"
+    }
 };
 
 initialConfig.public = JSON.stringify(initialConfig.public);
