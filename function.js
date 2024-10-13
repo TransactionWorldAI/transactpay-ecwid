@@ -134,6 +134,7 @@ var initialConfig = {
     private: {
         publicKey: "",
         secretKey: "",
+        encryptionKey: "",
         webhookURL: "https://transactpay.com/ecwid/webhook",
         testMode: "true",
         installed: "yes"

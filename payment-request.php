@@ -69,8 +69,9 @@ if (isset($_POST["data"])) {
 
     // Account info from merchant app settings in app interface in Ecwid CP
     // $x_account_id = $order['merchantAppSettings']['merchantId'];
-    $api_key = $order['merchantAppSettings']['apiKey'];
-    $encrypt_key = $order['merchantAppSettings']['encryptKey'];
+    $api_key = $order['merchantAppSettings']['publicKey'];
+    $encrypt_key = $order['merchantAppSettings']['encryptionKey'];
+    $testmode = $order['merchantAppSettings']['testMode'];
 
     // OPTIONAL: Split name field into two fields: first name and last name
     $fullName = explode(" ", $order["cart"]["order"]["billingPerson"]["name"]);
@@ -94,9 +95,6 @@ if (isset($_POST["data"])) {
     $callbackUrl = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?{$queryData}";
 
     $_SESSION["{$order['cart']['order']['id']}_returnUrl"] = $returnUrlPayload;
-
-    // apiKey:<merchant-public-key>,
-    // encryptionKey:<merchant-public-encryption-key>,
 
     $request = array(
         "apiKey" => $api_key,
@@ -215,6 +213,9 @@ if (isset($_GET["callbackPayload"]) && isset($_GET["status"])) {
     $r = base64_decode($_SESSION["{$orderNumber}_returnUrl"]);
     $returnUrl = openssl_decrypt($r, $cipher, $client_secret, $options = 0, $iv, $tag);
     session_destroy();
+
+    //TODO: Confirm the amount and currency paid before giving value.
+
 
     // Prepare request body for updating the order
     $json = json_encode(array(
