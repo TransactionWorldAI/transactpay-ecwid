@@ -196,6 +196,8 @@ $html = <<<PHP
 </html>
 PHP;
 
+echo $html;
+exit();
 }
 
 // If we are returning back to storefront. Callback from payment
