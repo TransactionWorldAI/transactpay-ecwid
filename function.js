@@ -30,7 +30,7 @@ function showEditPage(elementClass) {
 }
 
 
-// Function to retutn back to main app page after editing product label page
+// Function to return back to main app page after editing product label page
 
 function goBack() {
     document.querySelector('.content-control-menu-nav').style.display = 'none';
